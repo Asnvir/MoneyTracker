@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MoneyTracker</string>
+    <string-array name="options">
+        <item>Edit</item>
+        <item>Delete</item>
+    </string-array>
+
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+
+</resources>
