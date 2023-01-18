@@ -2,8 +2,10 @@ package com.example.moneytracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,12 +18,12 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SignInActivity extends AppCompatActivity {
 
 
-    FirebaseAuth firebaseAuth;
-    EditText signin_TXT_email;
-    EditText signin_TXT_password;
-    Button signin_BTN_login;
-    TextView signin_TXT_forgot_password;
-    TextView signin_TXT_signup;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    EditText txt_email;
+    EditText txt_password;
+    Button btn_login;
+    TextView txt_view_forgot_password;
+    TextView txt_view_signup;
 
 
     @Override
@@ -33,36 +35,39 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void findViews() {
-        signin_TXT_email = findViewById(R.id.signin_TXT_email);
-        signin_TXT_password = findViewById(R.id.signin_TXT_password);
-        signin_BTN_login = findViewById(R.id.signin_BTN_login);
-        signin_TXT_forgot_password = findViewById(R.id.signin_TXT_forgot_password);
-        signin_TXT_signup = findViewById(R.id.signin_TXT_signup);
+        txt_email = findViewById(R.id.signin_TXT_email);
+        txt_password = findViewById(R.id.signin_TXT_password);
+        btn_login = findViewById(R.id.signin_BTN_login);
+        txt_view_forgot_password = findViewById(R.id.signin_TXT_forgot_password);
+        txt_view_signup = findViewById(R.id.signin_TXT_signup);
     }
 
     private void registerListeners() {
-        registerTransferToSignUP();
-        registerLogin();
+        listenerTransferToSignUP();
+        listenerLOGIN();
     }
 
-    private void registerTransferToSignUP() {
-        signin_TXT_signup.setOnClickListener(v -> {
-            Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
-            finish();
-            startActivity(intent);
-        });
+    private void listenerTransferToSignUP() {
+        txt_view_signup.setOnClickListener(v -> navigateToSignUpActivity(SignInActivity.this));
     }
 
-    private void registerLogin() {
-        firebaseAuth = FirebaseAuth.getInstance();
-        signin_BTN_login.setOnClickListener(v -> {
-            String email = signin_TXT_email.getText().toString();
-            String password = signin_TXT_password.getText().toString();
-            if (!validateInputs(email, password)) {
-                return;
-            }
-            signIn(email, password);
-        });
+    private void navigateToSignUpActivity(Context context) {
+        Intent intent = new Intent(context, SignUpActivity.class);
+        finish();
+        startActivity(intent);
+    }
+
+    private void listenerLOGIN() {
+        btn_login.setOnClickListener(this::userLOGIN);
+    }
+
+    private void userLOGIN(View v) {
+        String email = txt_email.getText().toString();
+        String password = txt_password.getText().toString();
+        if (!validateInputs(email, password)) {
+            return;
+        }
+        signIn(email, password);
     }
 
     private boolean validateInputs(String email, String password) {
@@ -71,9 +76,7 @@ public class SignInActivity extends AppCompatActivity {
 
     private void signIn(String email, String password) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener(authResult -> {
-                    openDashBoardActivity();
-                })
+                .addOnSuccessListener(authResult -> openDashBoardActivity())
                 .addOnFailureListener(e -> Toast.makeText(SignInActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
@@ -82,6 +85,7 @@ public class SignInActivity extends AppCompatActivity {
         finish();
         startActivity(intent);
     }
+
 
 
 }

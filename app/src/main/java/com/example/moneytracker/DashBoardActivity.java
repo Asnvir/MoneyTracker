@@ -26,7 +26,7 @@ public class DashBoardActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     FirebaseDatabase database;
     DatabaseReference dbRef;
-    ArrayList<TransactionModel>  transactionModelArrayList;
+    ArrayList<TransactionModel> transactionModelArrayList;
     TransactionAdapter transactionAdapter;
     RecyclerView dashboard_VIEW_recyclerview;
 
@@ -60,7 +60,7 @@ public class DashBoardActivity extends AppCompatActivity {
 
     private void initPreLoadingData() {
         transactionModelArrayList = new ArrayList<>();
-        transactionAdapter = new TransactionAdapter(this,transactionModelArrayList);
+        transactionAdapter = new TransactionAdapter(this, transactionModelArrayList);
         dashboard_VIEW_recyclerview.setAdapter(transactionAdapter);
         dashboard_VIEW_recyclerview.setLayoutManager(new LinearLayoutManager(this));
         dashboard_VIEW_recyclerview.setHasFixedSize(true);
@@ -71,7 +71,7 @@ public class DashBoardActivity extends AppCompatActivity {
     }
 
     private void openAddTransactionActivity() {
-        Intent intent = new Intent(DashBoardActivity.this,AddTransactionActivity.class);
+        Intent intent = new Intent(DashBoardActivity.this, AddTransactionActivity.class);
         finish();
         startActivity(intent);
     }

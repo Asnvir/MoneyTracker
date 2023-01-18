@@ -2,7 +2,6 @@ package com.example.moneytracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,7 +21,7 @@ public class AddTransactionActivity extends AppCompatActivity {
     CheckBox chbx_expense;
     CheckBox chbx_income;
     Button btn_addtransaction;
-    String[] categories = {"Food", "Other", "Salary", "Shopping","Subscription","Transportation"};
+    String[] categories = {"Food", "Other", "Salary", "Shopping", "Subscription", "Transportation"};
 
 
     FirebaseAuth firebaseAuth;
@@ -41,8 +40,6 @@ public class AddTransactionActivity extends AppCompatActivity {
         registerlListeners();
 
     }
-
-
 
     private void initFireBase() {
         database = FirebaseDatabase.getInstance();
@@ -92,11 +89,5 @@ public class AddTransactionActivity extends AppCompatActivity {
         btn_addtransaction.setOnClickListener(callback);
     }
 
-
-    private void openDashBoardActivity() {
-        Intent intent = new Intent(AddTransactionActivity.this, DashBoardActivity.class);
-        finish();
-        startActivity(intent);
-    }
 
 }

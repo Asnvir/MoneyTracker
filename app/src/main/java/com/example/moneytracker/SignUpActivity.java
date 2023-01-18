@@ -2,24 +2,23 @@ package com.example.moneytracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+public class SignUpActivity extends AppCompatActivity implements OnUserCreationListener  {
 
-import com.google.firebase.auth.FirebaseAuth;
-
-public class SignUpActivity extends AppCompatActivity {
-
-    FirebaseAuth firebaseAuth;
-    EditText signup_TXT_email;
-    EditText signup_TXT_password;
-    Button signup_BTN_signup;
-    TextView signin_TXT_already_acoount;
+    private EditText txt_email;
+    private EditText txt_password;
+    private Button btn_signup;
+    private TextView txt_already_account;
+    private UserService userService;
 
 
     @Override
@@ -28,46 +27,63 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         findViews();
         registerListeners();
+        userService = new UserService(this);
     }
 
     private void findViews() {
-        signup_TXT_email = findViewById(R.id.signup_TXT_email);
-        signup_TXT_password = findViewById(R.id.signup_TXT_password);
-        signup_BTN_signup = findViewById(R.id.signup_BTN_signup);
-        signin_TXT_already_acoount = findViewById(R.id.signin_TXT_already_acoount);
+        txt_email = findViewById(R.id.signup_TXT_email);
+        txt_password = findViewById(R.id.signup_TXT_password);
+        btn_signup = findViewById(R.id.signup_BTN_signup);
+        txt_already_account = findViewById(R.id.signin_TXT_already_acoount);
     }
 
     private void registerListeners() {
-        registerTransferToSignIN();
-        registerLogin();
+        listenerTransferToSignIN();
+        listenerSINGUP();
     }
 
-    private void registerTransferToSignIN() {
-        signin_TXT_already_acoount.setOnClickListener(v -> {
-            Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
-            finish();
-            startActivity(intent);
-        });
+    private void listenerTransferToSignIN() {
+        txt_already_account.setOnClickListener(v -> navigateToSignInActivity(SignUpActivity.this));
     }
 
-    private void registerLogin() {
-        firebaseAuth = FirebaseAuth.getInstance();
-        signup_BTN_signup.setOnClickListener(v -> {
-            String email = signup_TXT_email.getText().toString();
-            String password = signup_TXT_password.getText().toString();
-            if (!validateInputs(email, password)) {
-                return;
-            }
-            firebaseAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnSuccessListener(authResult -> Toast.makeText(SignUpActivity.this, "User created.", Toast.LENGTH_SHORT).show())
-                    .addOnFailureListener(e -> Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show());
-        });
+    private void navigateToSignInActivity(Context context) {
+        Intent intent = new Intent(context, SignInActivity.class);
+        finish();
+        startActivity(intent);
+    }
+
+    private void listenerSINGUP() {
+        btn_signup.setOnClickListener(this::createUser);
+    }
+
+    private void createUser(View v) {
+        String email = txt_email.getText().toString();
+        String password = txt_password.getText().toString();
+        if (!validateInputs(email, password)) {
+            return;
+        }
+        userService.createUser(email, password);
     }
 
     private boolean validateInputs(String email, String password) {
         return !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password);
     }
 
+    @Override
+    public void onError(String errorMessage) {
+        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSuccess() {
+        openDashBoardActivity();
+    }
+
+    private void openDashBoardActivity() {
+        Intent intent = new Intent(SignUpActivity.this,DashBoardActivity.class);
+        finish();
+        startActivity(intent);
+    }
 
 
 }

@@ -2,7 +2,9 @@ package com.example.moneytracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Map;
 
 public class EditTransactionActivity extends AppCompatActivity {
 
@@ -119,3 +123,7 @@ public class EditTransactionActivity extends AppCompatActivity {
     }
 
 }
+
+
+
+
