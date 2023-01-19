@@ -1,6 +1,7 @@
 package com.example.moneytracker;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -104,6 +105,16 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         public void bind(TransactionModel model) {
             note.setText(model.getNote());
             amount.setText(model.getAmount());
+
+
+            if (model.getAmount().startsWith("+")) {
+                amount.setTextColor(Color.GREEN);
+            } else if (model.getAmount().startsWith("-")) {
+                amount.setTextColor(Color.RED);
+            } else {
+                amount.setTextColor(Color.BLACK);
+            }
+
             date.setText(model.getDate());
             String time = model.getTime();
             time = time.split(":")[0] + ":" + time.split(":")[1];

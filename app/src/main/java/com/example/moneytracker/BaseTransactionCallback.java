@@ -25,15 +25,16 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-abstract class BaseTransactionCallback extends AppCompatActivity {
-    protected Activity activity;
-    protected EditText txt_amount;
-    protected Spinner spnr_category;
-    protected EditText txt_note;
-    protected CheckBox chbx_expense;
-    protected CheckBox chbx_income;
-    protected FirebaseDatabase database;
-    protected DatabaseReference dbRef;
+abstract class BaseTransactionCallback {
+    private Activity activity;
+    private EditText txt_amount;
+    private Spinner spnr_category;
+    private EditText txt_note;
+    private CheckBox chbx_expense;
+    private CheckBox chbx_income;
+    private FirebaseDatabase database;
+    private DatabaseReference dbRef;
+    private BaseTransactionCallbackListener listener;
 
     public BaseTransactionCallback(Activity activity, EditText txt_amount, EditText txt_note, Spinner spnr_category, CheckBox chbx_expense, CheckBox chbx_income, FirebaseDatabase database, DatabaseReference dbRef) {
         this.activity = activity;
@@ -80,22 +81,26 @@ abstract class BaseTransactionCallback extends AppCompatActivity {
             if (transactionID != null) {
                 dbRef = database.getReference().child("users").child(currentUserUID).child("transactions").child(transactionID);
                 dbRef.setValue(transaction).addOnCompleteListener(this::onTransactionComplete);
+
             }
         }
     }
 
     protected void onTransactionComplete(Task<Void> task) {
         if (task.isSuccessful()) {
-            Toast.makeText(this, "Transaction successful", Toast.LENGTH_SHORT).show();
-            openDashBoardActivity();
+            if (listener != null) {
+                listener.onTransactionComplete(task);
+            }
         } else {
-            Toast.makeText(this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+            if (listener != null) {
+                listener.onTransactionFailed(task);
+            }
         }
     }
 
-    protected void openDashBoardActivity() {
-        Intent intent = new Intent(this, DashBoardActivity.class);
 
-        startActivity(intent);
+
+    public void setListener(BaseTransactionCallbackListener listener) {
+        this.listener = listener;
     }
 }

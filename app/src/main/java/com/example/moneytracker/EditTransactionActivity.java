@@ -3,6 +3,7 @@ package com.example.moneytracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,7 +11,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -18,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Map;
 
-public class EditTransactionActivity extends AppCompatActivity {
+public class EditTransactionActivity extends AppCompatActivity implements BaseTransactionCallbackListener {
 
     EditText txt_amount;
     Spinner  spnr_category;
@@ -119,9 +122,25 @@ public class EditTransactionActivity extends AppCompatActivity {
 
     private void registerEditAction() {
         EditTransactionCallback callback = new EditTransactionCallback(EditTransactionActivity.this, txt_amount, txt_note, spnr_category, chbx_expense, chbx_income, database, dbRef,curr_txt_transactionID);
+        callback.setListener(this);
         btn_eddittransaction.setOnClickListener(callback);
     }
 
+    @Override
+    public void onTransactionComplete(Task<Void> task) {
+        Intent intent = new Intent(EditTransactionActivity.this,DashBoardActivity.class);
+        finish();
+        Toast.makeText(EditTransactionActivity.this, "EDIT TRANSACTION OK", Toast.LENGTH_LONG).show();
+        startActivity(intent);
+
+    }
+
+    @Override
+    public void onTransactionFailed(Task<Void> task) {
+
+        String errorMessage = task.getException().getMessage();
+        Toast.makeText(EditTransactionActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+    }
 }
 
 
