@@ -82,23 +82,38 @@ public class EditTransactionActivity extends AppCompatActivity implements BaseTr
     }
 
     private void inputCurrentValues() {
-        txt_amount.setText(String.valueOf(curr_txt_amount));
+        setAmount();
+        setCategory();
+        setNote();
+        setType();
+    }
 
+    private void setAmount() {
+        curr_txt_amount = curr_txt_amount.substring(1);
+        txt_amount.setText(curr_txt_amount);
+    }
+
+    private void setCategory() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnr_category.setAdapter(adapter);
+        spnr_category.setSelection(adapter.getPosition(curr_txt_category));
+    }
 
-        int spinnerPosition = adapter.getPosition(curr_txt_category);
-        spnr_category.setSelection(spinnerPosition);
-
+    private void setNote() {
         txt_note.setText(curr_txt_note);
+    }
 
-        if(curr_txt_type.equals("Expense")){
+    private void setType() {
+        if (curr_txt_type.equals("expense")) {
             chbx_expense.setChecked(true);
-        }else{
+            chbx_income.setChecked(false);
+        } else {
+            chbx_expense.setChecked(false);
             chbx_income.setChecked(true);
         }
     }
+
 
     private void registerlListeners() {
         registerExpenseCheckBox();
@@ -127,20 +142,20 @@ public class EditTransactionActivity extends AppCompatActivity implements BaseTr
     }
 
     @Override
-    public void onTransactionComplete(Task<Void> task) {
+    public void onTransactionUploadComplete(Task<Void> task) {
         Intent intent = new Intent(EditTransactionActivity.this,DashBoardActivity.class);
         finish();
         Toast.makeText(EditTransactionActivity.this, "EDIT TRANSACTION OK", Toast.LENGTH_LONG).show();
         startActivity(intent);
-
     }
 
     @Override
-    public void onTransactionFailed(Task<Void> task) {
+    public void onTransactionUploadFailed(Task<Void> task) {
 
         String errorMessage = task.getException().getMessage();
         Toast.makeText(EditTransactionActivity.this, errorMessage, Toast.LENGTH_LONG).show();
     }
+
 }
 
 

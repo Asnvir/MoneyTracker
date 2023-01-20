@@ -101,9 +101,8 @@ public class AddTransactionActivity extends AppCompatActivity implements BaseTra
         btn_addtransaction.setOnClickListener(callback);
     }
 
-
     @Override
-    public void onTransactionComplete(Task<Void> task) {
+    public void onTransactionUploadComplete(Task<Void> task) {
         Intent intent = new Intent(AddTransactionActivity.this,DashBoardActivity.class);
         finish();
         Toast.makeText(AddTransactionActivity.this, "ADD TRANSACTION OK", Toast.LENGTH_LONG).show();
@@ -111,10 +110,8 @@ public class AddTransactionActivity extends AppCompatActivity implements BaseTra
 
     }
 
-
-
     @Override
-    public void onTransactionFailed(Task<Void> task) {
+    public void onTransactionUploadFailed(Task<Void> task) {
 
         String errorMessage = task.getException().getMessage();
         Toast.makeText(AddTransactionActivity.this, errorMessage, Toast.LENGTH_LONG).show();

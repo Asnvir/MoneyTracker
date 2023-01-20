@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -20,10 +21,7 @@ class MyOnItemClickListener implements TransactionAdapter.OnItemClickListener {
         this.context = context;
     }
 
-    @Override
-    public void onItemClick(int position) {
-        // Handle short press event
-    }
+
 
     @Override
     public void onItemLongClick(final int position) {
@@ -34,6 +32,7 @@ class MyOnItemClickListener implements TransactionAdapter.OnItemClickListener {
                     public void onClick(DialogInterface dialog, int which) {
                         if (which == 0) {
                             // Edit item
+//                            TransactionModel model = adapter.getModelAt(position);
                             TransactionModel model = adapter.getModelAt(position);
                             Intent intent = new Intent(context, EditTransactionActivity.class);
                             intent.putExtra("transactionID", model.getTransactionID());
@@ -50,7 +49,7 @@ class MyOnItemClickListener implements TransactionAdapter.OnItemClickListener {
                             // Delete item
                             TransactionModel model = adapter.getModelAt(position);
                             String transactionID = model.getTransactionID();
-                            deleteTransaction(transactionID, position);
+                            deleteTransaction(transactionID);
                         }
                     }
                 });
@@ -58,16 +57,16 @@ class MyOnItemClickListener implements TransactionAdapter.OnItemClickListener {
     }
 
 
-    private void deleteTransaction(String transactionID, int position) {
+    private void deleteTransaction(String transactionID) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String currentUserUID = user.getUid();
-        DatabaseReference transactionRef = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserUID).child("transactions").child(transactionID);
-        transactionRef.removeValue();
-        adapter.removeAt(position);
+        if (user != null){
+            String currentUserUID = user.getUid();
+            String transactionRef = "users/"+currentUserUID.toString()+"/transactions/"+transactionID;
+            DatabaseHandler.getInstance().deleteData(transactionRef);
+        }
+
+
     }
 
 
-
 }
-
-

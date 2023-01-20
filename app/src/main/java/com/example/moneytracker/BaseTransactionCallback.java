@@ -2,15 +2,9 @@ package com.example.moneytracker;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 abstract class BaseTransactionCallback {
@@ -34,7 +27,10 @@ abstract class BaseTransactionCallback {
     private CheckBox chbx_income;
     private FirebaseDatabase database;
     private DatabaseReference dbRef;
-    private BaseTransactionCallbackListener listener;
+
+
+
+    protected BaseTransactionCallbackListener listener;
 
     public BaseTransactionCallback(Activity activity, EditText txt_amount, EditText txt_note, Spinner spnr_category, CheckBox chbx_expense, CheckBox chbx_income, FirebaseDatabase database, DatabaseReference dbRef) {
         this.activity = activity;
@@ -46,6 +42,12 @@ abstract class BaseTransactionCallback {
         this.database = database;
         this.dbRef = dbRef;
     }
+
+    public void setListener(BaseTransactionCallbackListener listener) {
+        this.listener = listener;
+    }
+
+
 
     protected boolean isValidUserInput() {
         InputValidator validator = new InputValidator(txt_amount, txt_note, spnr_category, chbx_expense, chbx_income);
@@ -79,28 +81,22 @@ abstract class BaseTransactionCallback {
             String currentUserUID = user.getUid();
             String transactionID = (String) transaction.get("transactionID");
             if (transactionID != null) {
-                dbRef = database.getReference().child("users").child(currentUserUID).child("transactions").child(transactionID);
-                dbRef.setValue(transaction).addOnCompleteListener(this::onTransactionComplete);
+                Task<Void> taskUpload = DatabaseHandler.getInstance().uploadData(transaction, "users/" + currentUserUID + "/transactions/" + transactionID );
+                taskUpload.addOnCompleteListener(task -> handleTransactionUploadResult(task, listener));
 
             }
         }
     }
 
-    protected void onTransactionComplete(Task<Void> task) {
+    public void handleTransactionUploadResult(Task<Void> task, BaseTransactionCallbackListener listener) {
         if (task.isSuccessful()) {
             if (listener != null) {
-                listener.onTransactionComplete(task);
+                listener.onTransactionUploadComplete(task);
             }
         } else {
             if (listener != null) {
-                listener.onTransactionFailed(task);
+                listener.onTransactionUploadFailed(task);
             }
         }
-    }
-
-
-
-    public void setListener(BaseTransactionCallbackListener listener) {
-        this.listener = listener;
     }
 }

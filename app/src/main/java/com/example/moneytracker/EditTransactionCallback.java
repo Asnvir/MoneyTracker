@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -33,15 +34,17 @@ public class EditTransactionCallback extends BaseTransactionCallback implements 
         return transaction;
     }
 
+
+
     @Override
     protected void uploadTransaction(Map<String, Object> transaction) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
         String currentUserUID = user.getUid();
-        DatabaseReference transactionRef = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserUID).child("transactions").child(curr_txt_transactionID);
-        transactionRef.setValue(transaction).addOnCompleteListener(this::onTransactionComplete);
-
+        Task<Void> taskUpload = DatabaseHandler.getInstance().uploadData(transaction, "users/" + currentUserUID + "/transactions/" + curr_txt_transactionID );
+        taskUpload.addOnCompleteListener(task -> handleTransactionUploadResult(task, listener));
     }
+
 
     @Override
     public void onClick(View v) {

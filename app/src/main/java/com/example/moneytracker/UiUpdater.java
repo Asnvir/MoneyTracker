@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 
 public class UiUpdater {
+
     private RecyclerView recyclerView;
     private Activity activity;
 
@@ -36,13 +37,15 @@ public class UiUpdater {
     }
 
     public void updateRecyclerView(ArrayList<TransactionModel> transactions) {
-        TransactionAdapter transactionAdapter = new TransactionAdapter(activity, transactions);
+        TransactionAdapter transactionAdapter = new TransactionAdapter(activity,transactions);
         transactionAdapter.setOnItemClickListener(new MyOnItemClickListener(transactionAdapter, activity));
         recyclerView.setAdapter(transactionAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         recyclerView.setHasFixedSize(true);
     }
 
+
 }
+
 
 
