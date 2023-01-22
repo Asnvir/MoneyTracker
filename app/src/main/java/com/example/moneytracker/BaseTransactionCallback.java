@@ -47,8 +47,6 @@ abstract class BaseTransactionCallback {
         this.listener = listener;
     }
 
-
-
     protected boolean isValidUserInput() {
         InputValidator validator = new InputValidator(txt_amount, txt_note, spnr_category, chbx_expense, chbx_income);
         return validator.isValidInput();

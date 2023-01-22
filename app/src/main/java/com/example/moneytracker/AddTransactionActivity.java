@@ -1,6 +1,5 @@
 package com.example.moneytracker;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,13 +14,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.Objects;
 
 public class AddTransactionActivity extends AppCompatActivity implements BaseTransactionCallbackListener {
     EditText txt_amount;
@@ -103,7 +97,7 @@ public class AddTransactionActivity extends AppCompatActivity implements BaseTra
 
     @Override
     public void onTransactionUploadComplete(Task<Void> task) {
-        Intent intent = new Intent(AddTransactionActivity.this,DashBoardActivity.class);
+        Intent intent = new Intent(AddTransactionActivity.this, DashBoardActivity.class);
         finish();
         Toast.makeText(AddTransactionActivity.this, "ADD TRANSACTION OK", Toast.LENGTH_LONG).show();
         startActivity(intent);
