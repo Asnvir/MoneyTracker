@@ -1,41 +1,54 @@
 package com.example.moneytracker;
 
+import com.example.moneytracker.util.Utils;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.UUID;
+
 
 public class TransactionModel {
-    private String amount;
-    private String note;
     private String transactionID;
-    private String category;
-    private String type;
     private String date;
     private String time;
+    private double amount;
+    private String category;
+    private String note;
+    private String type;
+
+
 
     public TransactionModel() {
-
     }
 
-    public TransactionModel(String amount, String note, String transactionID, String category, String type, String date, String time) {
-        this.amount = amount;
-        this.note = note;
-        this.transactionID = transactionID;
-        this.category = category;
-        this.type = type;
-        this.date = date;
-        this.time = time;
+
+    public TransactionModel setTransactionID() {
+        transactionID = UUID.randomUUID().toString();
+        return this;
     }
 
-    public String getAmount() {
-        return amount;
+    public TransactionModel setDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        date = dateFormat.format(new Date());
+        return this;
     }
 
-    public TransactionModel setAmount(String amount) {
+    public TransactionModel setTime() {
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss",Locale.getDefault());
+        time = timeFormat.format(new Date());
+        return this;
+    }
+
+    public TransactionModel setAmount(double amount) {
         this.amount = amount;
         return this;
     }
 
-    public String getNote() {
-        return note;
+    public TransactionModel setCategory(String category){
+        this.category = category;
+        return this;
     }
 
     public TransactionModel setNote(String note) {
@@ -43,49 +56,41 @@ public class TransactionModel {
         return this;
     }
 
+    public TransactionModel setType(Boolean isExpense,Boolean isIncome) {
+        if(!isExpense && isIncome){
+            type = Utils.INCOME;
+        }else if (isExpense && !isIncome){
+            type = Utils.EXPENSE;
+        }
+        return this;
+    }
+
     public String getTransactionID() {
         return transactionID;
-    }
-
-    public TransactionModel setTransactionID(String transactionID) {
-        this.transactionID = transactionID;
-        return this;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public TransactionModel setCategory(String category) {
-        this.category = category;
-        return this;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public TransactionModel setType(String type) {
-        this.type = type;
-        return this;
     }
 
     public String getDate() {
         return date;
     }
 
-    public TransactionModel setDate(String date) {
-        this.date = date;
-        return this;
-    }
-
     public String getTime() {
         return time;
     }
 
-    public TransactionModel setTime(String time) {
-        this.time = time;
-        return this;
+    public double getAmount() {
+        return amount;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public String getType() {
+        return type;
     }
 
     @Override

@@ -5,68 +5,51 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
-import android.os.Parcel;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
-import com.bumptech.glide.load.Options;
 import com.example.moneytracker.databinding.ActivityDashBoardBinding;
-import com.google.android.material.bottomappbar.BottomAppBar;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
+import com.example.moneytracker.fragments.FragmentAddTransactionViewHolder;
+import com.example.moneytracker.fragments.FragmentDashboardViewHolder;
+import com.example.moneytracker.navigation.Navigator;
 
 
-public class DashBoardActivity extends AppCompatActivity implements Navigator{
-
+public class DashBoardActivity extends AppCompatActivity implements Navigator {
 
     private ActivityDashBoardBinding binding;
-
-
-    private Fragment currentFragment() {
-        return getSupportFragmentManager().findFragmentById(R.id.dahsboard_fragmentContainer);
-    }
-
-    private FragmentManager.FragmentLifecycleCallbacks fragmentListener = new FragmentManager.FragmentLifecycleCallbacks() {
+    private DashBoardViewModel viewModel;
+    private final FragmentManager.FragmentLifecycleCallbacks fragmentListener = new FragmentManager.FragmentLifecycleCallbacks() {
         @Override
-        public void onFragmentViewCreated(FragmentManager fm, Fragment f, View v, Bundle savedInstanceState) {
+        public void onFragmentViewCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull View v, Bundle savedInstanceState) {
             super.onFragmentViewCreated(fm, f, v, savedInstanceState);
-//            updateUi();
+//            updateUI();
         }
     };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         binding = ActivityDashBoardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        MyViewModel viewModel = new ViewModelProvider(this).get(MyViewModel.class);
-        viewModel.setNavigator(this);
-
-
-        if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.dahsboard_fragmentContainer, new FragmentDashboard())
-                    .commit();
-        }
-
+        viewModel = new ViewModelProvider(this).get(DashBoardViewModel.class);
+        updateBalanceIncome();
+        startFragmentDashboard(savedInstanceState);
         getSupportFragmentManager().registerFragmentLifecycleCallbacks(fragmentListener, false);
-
     }
 
+    private void updateBalanceIncome() {
+        viewModel.getIncome().observe(this, integer -> binding.dashboardTXTIncome.setText("Income: " + integer));
+        viewModel.getBalance().observe(this, integer -> binding.dashboardTXTBalance.setText("Balance: " + integer));
+    }
 
-
-    private void updateUi() {
-
+    private void startFragmentDashboard(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.dahsboard_fragmentContainer, new FragmentDashboardViewHolder())
+                    .commit();
+        }
     }
 
 
@@ -75,6 +58,7 @@ public class DashBoardActivity extends AppCompatActivity implements Navigator{
         super.onDestroy();
         getSupportFragmentManager().unregisterFragmentLifecycleCallbacks(fragmentListener);
     }
+
 
     private void launchFragment(Fragment fragment) {
         getSupportFragmentManager()
@@ -90,6 +74,10 @@ public class DashBoardActivity extends AppCompatActivity implements Navigator{
                 .commit();
     }
 
+    private Fragment getCurrentFragment() {
+        return getSupportFragmentManager().findFragmentById(R.id.dahsboard_fragmentContainer);
+    }
+
 
     @Override
     public void showOptionsScreen() {
@@ -98,26 +86,21 @@ public class DashBoardActivity extends AppCompatActivity implements Navigator{
 
     @Override
     public void showAddTransactionScreen() {
-
+        launchFragment(new FragmentAddTransactionViewHolder());
     }
 
     @Override
     public void showEditTransactionScreen(String jsonTransaction) {
-        MySignal.getInstance().toast(jsonTransaction);
-        launchFragment(FragmentEditTransaction.newInstance(jsonTransaction));
+
     }
 
     @Override
     public void showTransactionsScreen() {
-
+        launchFragment(new FragmentDashboardViewHolder());
     }
 
     @Override
     public void goBack() {
 
     }
-
 }
-
-
-

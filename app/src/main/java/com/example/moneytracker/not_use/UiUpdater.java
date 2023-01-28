@@ -1,4 +1,4 @@
-package com.example.moneytracker;
+package com.example.moneytracker.not_use;
 
 import android.app.Activity;
 import android.widget.TextView;

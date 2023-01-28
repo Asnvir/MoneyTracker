@@ -1,12 +1,9 @@
-package com.example.moneytracker;
-
+package com.example.moneytracker.fragments;
 
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +13,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
+
+import com.example.moneytracker.TransactionModel;
 import com.google.gson.Gson;
 
 
-import com.example.moneytracker.databinding.FragmentDashboardBinding;
 import com.example.moneytracker.databinding.FragmentEditTransactionBinding;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -30,14 +26,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 //public class FragmentEditTransaction extends Fragment implements BaseTransactionCallbackListener
-public class FragmentEditTransaction extends Fragment  {
+public class FragmentEditTransactionViewHolder extends Fragment {
 
     EditText txt_amount;
-    Spinner  spnr_category;
+    Spinner spnr_category;
     EditText txt_note;
     CheckBox chbx_expense;
     CheckBox chbx_income;
-    Button   btn_eddittransaction;
+    Button btn_eddittransaction;
     String curr_txt_amount;
     String curr_txt_category;
     String curr_txt_note;
@@ -55,12 +51,12 @@ public class FragmentEditTransaction extends Fragment  {
     private TransactionModel transactionModel;
 
 
-    String[] categories = {"Food", "Other", "Salary", "Shopping","Subscription","Transportation"};
+    String[] categories = {"Food", "Other", "Salary", "Shopping", "Subscription", "Transportation"};
 
-    public static FragmentEditTransaction newInstance(String jsonTransaction) {
-        FragmentEditTransaction fragment = new FragmentEditTransaction();
+    public static FragmentEditTransactionViewHolder newInstance(String jsonTransaction) {
+        FragmentEditTransactionViewHolder fragment = new FragmentEditTransactionViewHolder();
         Bundle args = new Bundle();
-        args.putString("jsonTransaction",jsonTransaction);
+        args.putString("jsonTransaction", jsonTransaction);
         fragment.setArguments(args);
         return fragment;
     }
@@ -71,7 +67,7 @@ public class FragmentEditTransaction extends Fragment  {
         if (getArguments() != null) {
             Gson gson = new Gson();
             String jsonTransaction = getArguments().getString("jsonTransaction");
-            transactionModel = gson.fromJson(jsonTransaction,TransactionModel.class);
+            transactionModel = gson.fromJson(jsonTransaction, TransactionModel.class);
         }
     }
 
@@ -90,6 +86,12 @@ public class FragmentEditTransaction extends Fragment  {
         return binding.getRoot();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
 
 //
 //    private void initFireBase() {
@@ -102,9 +104,9 @@ public class FragmentEditTransaction extends Fragment  {
     private void getCurrentValues() {
 
 
-        curr_txt_amount = transactionModel.getAmount();
+//        curr_txt_amount = transactionModel.getAmount();
         curr_txt_category = transactionModel.getCategory();
-        curr_txt_note =transactionModel.getNote();
+        curr_txt_note = transactionModel.getNote();
         curr_txt_type = transactionModel.getType();
         curr_txt_transactionID = transactionModel.getTransactionID();
     }
@@ -164,9 +166,9 @@ public class FragmentEditTransaction extends Fragment  {
     }
 
     private void registerEditAction() {
-        EditTransactionCallback callback = new EditTransactionCallback(FragmentEditTransaction.this, txt_amount, txt_note, spnr_category, chbx_expense, chbx_income, database, dbRef,curr_txt_transactionID);
-        callback.setListener(this);
-        btn_eddittransaction.setOnClickListener(callback);
+//        EditTransactionCallback callback = new EditTransactionCallback(FragmentEditTransaction.this, txt_amount, txt_note, spnr_category, chbx_expense, chbx_income, database, dbRef,curr_txt_transactionID);
+//        callback.setListener(this);
+//        btn_eddittransaction.setOnClickListener(callback);
     }
 //
 //    @Override

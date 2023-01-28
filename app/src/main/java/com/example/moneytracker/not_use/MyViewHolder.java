@@ -1,4 +1,4 @@
-package com.example.moneytracker;
+package com.example.moneytracker.not_use;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
@@ -8,6 +8,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.moneytracker.MyImage;
+import com.example.moneytracker.R;
+import com.example.moneytracker.TransactionModel;
 
 public class MyViewHolder extends RecyclerView.ViewHolder {
     private TextView note, amount, date, time, category;
@@ -34,7 +38,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(TransactionModel model) {
         setNote(model);
-        setAmount(model);
+//        setAmount(model);
         setDate(model);
         setTime(model);
         setCategory(model);
@@ -45,17 +49,17 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         note.setText(model.getNote());
     }
 
-    private void setAmount(TransactionModel model) {
-        amount.setText(model.getAmount());
-
-        if (model.getAmount().startsWith("+")) {
-            amount.setTextColor(Color.GREEN);
-        } else if (model.getAmount().startsWith("-")) {
-            amount.setTextColor(Color.RED);
-        } else {
-            amount.setTextColor(Color.BLACK);
-        }
-    }
+//    private void setAmount(TransactionModel model) {
+//        amount.setText(model.getAmount());
+//
+//        if (model.getAmount().startsWith("+")) {
+//            amount.setTextColor(Color.GREEN);
+//        } else if (model.getAmount().startsWith("-")) {
+//            amount.setTextColor(Color.RED);
+//        } else {
+//            amount.setTextColor(Color.BLACK);
+//        }
+//    }
 
     private void setDate(TransactionModel model) {
         date.setText(model.getDate());

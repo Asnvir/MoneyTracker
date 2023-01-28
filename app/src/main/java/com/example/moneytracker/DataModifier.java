@@ -1,5 +1,6 @@
 package com.example.moneytracker;
 
+import com.example.moneytracker.util.Utils;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
@@ -13,18 +14,19 @@ public class DataModifier {
     private DataModifier() {
     }
 
-    public static ModifiedData modifyData(DataSnapshot dataSnapshot) {
-        ArrayList<TransactionModel> transactions = getTransactions(dataSnapshot.child("transactions"));
-        sortTransactions(transactions);
-        Map<String, String> expenseIncomeBalance = calculateExpenseIncomeBalance(transactions);
-        modifyTransactionAmounts(transactions);
-
-        String expense = expenseIncomeBalance.get("expense");
-        String income = expenseIncomeBalance.get("income");
-        String balance = expenseIncomeBalance.get("balance");
-
-        return new ModifiedData(transactions, expense, income, balance);
-    }
+//    public static ModifiedData modifyData(DataSnapshot dataSnapshot) {
+//        ArrayList<TransactionModel> transactions = getTransactions(dataSnapshot.child("transactions"));
+//        sortTransactions(transactions);
+////        Map<String, String> expenseIncomeBalance = calculateExpenseIncomeBalance(transactions);
+////        modifyTransactionAmounts(transactions);
+//
+////        String expense = expenseIncomeBalance.get("expense");
+////        String income = expenseIncomeBalance.get("income");
+////        String balance = expenseIncomeBalance.get("balance");
+//
+////        return new ModifiedData(transactions, expense, income, balance);
+//        return new ModifiedData(transactions);
+//    }
 
     private static ArrayList<TransactionModel> getTransactions(DataSnapshot dataSnapshot) {
         ArrayList<TransactionModel> transactions = new ArrayList<>();
@@ -48,41 +50,38 @@ public class DataModifier {
         }
     };
 
-    private static Map<String, String> calculateExpenseIncomeBalance(ArrayList<TransactionModel> transactions) {
+    private static Map<String, Double> calculateExpenseIncomeBalance(ArrayList<TransactionModel> transactions) {
         double generalExpense = 0;
         double generalIncome = 0;
         double generalBalance;
         for (TransactionModel model : transactions) {
-            double amount = Double.parseDouble(model.getAmount());
+            double amount = model.getAmount();
             String type = model.getType();
-            if (type.equals("expense")) {
+            if (type.equalsIgnoreCase(Utils.EXPENSE)) {
                 generalExpense += amount;
-            } else if (type.equals("income")) {
+            } else if (type.equalsIgnoreCase(Utils.INCOME)) {
                 generalIncome += amount;
             }
         }
         generalBalance = generalIncome - generalExpense;
-        String expense = generalExpense == 0 ? "0" : "- " + String.valueOf(generalExpense);
-        String income = generalIncome == 0 ? "0" : "+ " + String.valueOf(generalIncome);
-        String balance = generalBalance == 0 ? "0" : generalBalance < 0 ? String.valueOf(generalBalance) : "+ " + String.valueOf(generalBalance);
 
-        Map<String, String> result = new HashMap<>();
-        result.put("expense", expense);
-        result.put("income", income);
-        result.put("balance", balance);
+        Map<String, Double> result = new HashMap<>();
+        result.put(Utils.EXPENSE, generalExpense);
+        result.put(Utils.INCOME, generalIncome);
+        result.put(Utils.BALANCE, generalBalance);
         return result;
     }
 
-    private static void modifyTransactionAmounts(ArrayList<TransactionModel> transactions) {
-        for (TransactionModel model : transactions) {
-            String type = model.getType();
-            double amount = Double.parseDouble(model.getAmount());
-            if (type.equals("expense")) {
-                model.setAmount("-" + String.valueOf(amount));
-            } else if (type.equals("income")) {
-                model.setAmount("+" + String.valueOf(amount));
-            }
-        }
-    }
+//    private static void modifyTransactionAmounts(ArrayList<TransactionModel> transactions) {
+//        for (TransactionModel model : transactions) {
+//            String type = model.getType();
+//            double amount = Double.parseDouble(model.getAmount());
+//            if (type.equals("expense")) {
+//                model.setAmount("-" + String.valueOf(amount));
+//            } else if (type.equals("income")) {
+//                model.setAmount("+" + String.valueOf(amount));
+//            }
+//        }
+//    }
 
 }

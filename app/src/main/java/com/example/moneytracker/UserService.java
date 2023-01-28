@@ -23,10 +23,11 @@ public class UserService {
     public void initializeUser(String uid) {
         DatabaseReference userRef = firebaseDatabase.getReference("users/" + uid + "/amount");
         Map<String, Object> values = new HashMap<>();
-        values.put("expense", "0");
-        values.put("income", "0");
-        values.put("balance", "0");
+        values.put("expense", 0);
+        values.put("income", 0);
+        values.put("balance", 0);
         userRef.updateChildren(values);
+
     }
 
     public void createUser(String email, String password) {

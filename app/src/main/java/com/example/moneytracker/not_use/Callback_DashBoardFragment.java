@@ -1,4 +1,4 @@
-package com.example.moneytracker;
+package com.example.moneytracker.not_use;
 
 public interface Callback_DashBoardFragment {
     void addButtonClicked();
