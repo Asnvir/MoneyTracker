@@ -1,6 +1,5 @@
 package com.example.moneytracker.not_use;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -9,9 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.moneytracker.MyImage;
+import com.example.moneytracker.util.MyImage;
 import com.example.moneytracker.R;
-import com.example.moneytracker.TransactionModel;
+import com.example.moneytracker.Transaction;
 
 public class MyViewHolder extends RecyclerView.ViewHolder {
     private TextView note, amount, date, time, category;
@@ -36,7 +35,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    public void bind(TransactionModel model) {
+    public void bind(Transaction model) {
         setNote(model);
 //        setAmount(model);
         setDate(model);
@@ -45,7 +44,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         setImageCategory(context,model);
     }
 
-    private void setNote(TransactionModel model) {
+    private void setNote(Transaction model) {
         note.setText(model.getNote());
     }
 
@@ -61,21 +60,21 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 //        }
 //    }
 
-    private void setDate(TransactionModel model) {
+    private void setDate(Transaction model) {
         date.setText(model.getDate());
     }
 
-    private void setTime(TransactionModel model) {
+    private void setTime(Transaction model) {
         String time = model.getTime();
         time = time.split(":")[0] + ":" + time.split(":")[1];
         this.time.setText(time);
     }
 
-    private void setCategory(TransactionModel model) {
+    private void setCategory(Transaction model) {
         category.setText(model.getCategory());
     }
 
-    private void setImageCategory(Context context, TransactionModel model) {
+    private void setImageCategory(Context context, Transaction model) {
         String category = model.getCategory().toLowerCase();
         MyImage.getInstance().loadCategoryImage(context,img_category, category, progressBar);
     }

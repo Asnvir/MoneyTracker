@@ -1,21 +1,23 @@
-package com.example.moneytracker;
+package com.example.moneytracker.util;
+
+import com.example.moneytracker.Transaction;
 
 import java.util.ArrayList;
 
 public class ModifiedData {
-    private ArrayList<TransactionModel> transactions;
+    private ArrayList<Transaction> transactions;
     private String expense;
     private String income;
     private String balance;
 
-    public ModifiedData(ArrayList<TransactionModel> transactions, String expense, String income, String balance) {
+    public ModifiedData(ArrayList<Transaction> transactions, String expense, String income, String balance) {
         this.transactions = transactions;
         this.expense = expense;
         this.income = income;
         this.balance = balance;
     }
 
-    public ArrayList<TransactionModel> getTransactions() {
+    public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
 

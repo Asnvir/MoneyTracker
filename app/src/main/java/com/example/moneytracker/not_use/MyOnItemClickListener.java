@@ -1,4 +1,4 @@
-package com.example.moneytracker;
+package com.example.moneytracker.not_use;
 
 //class MyOnItemClickListener implements TransactionAdapter.OnItemClickListener {
 //    private final TransactionAdapter adapter;

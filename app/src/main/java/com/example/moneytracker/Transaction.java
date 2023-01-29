@@ -2,6 +2,7 @@ package com.example.moneytracker;
 
 import com.example.moneytracker.util.Utils;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -9,7 +10,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 
-public class TransactionModel {
+public class Transaction {
     private String transactionID;
     private String date;
     private String time;
@@ -20,48 +21,44 @@ public class TransactionModel {
 
 
 
-    public TransactionModel() {
+    public Transaction() {
     }
 
 
-    public TransactionModel setTransactionID() {
+    public Transaction setTransactionID() {
         transactionID = UUID.randomUUID().toString();
         return this;
     }
 
-    public TransactionModel setDate() {
+    public Transaction setDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         date = dateFormat.format(new Date());
         return this;
     }
 
-    public TransactionModel setTime() {
+    public Transaction setTime() {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss",Locale.getDefault());
         time = timeFormat.format(new Date());
         return this;
     }
 
-    public TransactionModel setAmount(double amount) {
-        this.amount = amount;
+    public Transaction setAmount(double amount) {
+        this.amount = (double) Math.round(amount * 100) / 100;
         return this;
     }
 
-    public TransactionModel setCategory(String category){
+    public Transaction setCategory(String category){
         this.category = category;
         return this;
     }
 
-    public TransactionModel setNote(String note) {
+    public Transaction setNote(String note) {
         this.note = note;
         return this;
     }
 
-    public TransactionModel setType(Boolean isExpense,Boolean isIncome) {
-        if(!isExpense && isIncome){
-            type = Utils.INCOME;
-        }else if (isExpense && !isIncome){
-            type = Utils.EXPENSE;
-        }
+    public Transaction setType(String type) {
+        this.type = type;
         return this;
     }
 
@@ -97,7 +94,7 @@ public class TransactionModel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TransactionModel that = (TransactionModel) o;
+        Transaction that = (Transaction) o;
         return Objects.equals(transactionID, that.transactionID);
     }
 

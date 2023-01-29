@@ -18,5 +18,18 @@ public class Utils {
     public static final String NODE_CATEGORIES = "categories";
     public static final String NODE_USERS = "users";
     public static final String NODE_TRANSACTIONS = "transactions";
+    public static final String NODE_AMOUNT = "amount";
+
+
+    public static final String NODE_INCOME = "income";
+    public static final String NODE_EXPENSE = "expense";
+    public static final String NODE_BALANCE = "balance";
+
+
+    public static final String DASHBOARD = "Dashboard";
+    public static final String ADD_TRANSACTION = "Add transaction";
+    public static final String Edit_TRANSACTION = "Edit transaction";
+    public static final String Settings = "Settings";
+
 
 }

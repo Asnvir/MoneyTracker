@@ -12,16 +12,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.moneytracker.MySignal;
+import com.example.moneytracker.util.MySignal;
 import com.example.moneytracker.R;
 import com.example.moneytracker.TransactionAdapter;
 import com.example.moneytracker.databinding.FragmentDashboardBinding;
+import com.example.moneytracker.interfaces.HasTitle;
 import com.example.moneytracker.navigation.FragmentHelper;
 import com.example.moneytracker.navigation.Navigator;
 
-public class FragmentDashboardViewHolder extends Fragment {
+public class DashboardHolder extends Fragment implements HasTitle {
     private FragmentDashboardBinding binding;
-    private FragmentDashboardViewModel viewModel;
+    private DashboardViewModel viewModel;
     private TransactionAdapter adapter;
     private Navigator navigator;
 
@@ -29,7 +30,7 @@ public class FragmentDashboardViewHolder extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(requireActivity()).get(FragmentDashboardViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(DashboardViewModel.class);
         adapter = new TransactionAdapter();
         navigator = FragmentHelper.navigator(this);
     }
@@ -91,6 +92,12 @@ public class FragmentDashboardViewHolder extends Fragment {
                 navigator.showAddTransactionScreen();
             }
         });
+    }
+
+
+    @Override
+    public String getTitle() {
+        return viewModel.getTitle();
     }
 }
 
@@ -222,10 +229,10 @@ public class FragmentDashboardViewHolder extends Fragment {
 ////import android.view.View;
 ////import android.view.ViewGroup;
 ////
-////import com.example.moneytracker.DataModifier;
+////import com.example.moneytracker.data.DataModifier;
 ////import com.example.moneytracker.DataRetriever;
-////import com.example.moneytracker.ModifiedData;
-////import com.example.moneytracker.MySignal;
+////import com.example.moneytracker.util.ModifiedData;
+////import com.example.moneytracker.util.MySignal;
 ////import com.example.moneytracker.not_use.MyViewModel;
 ////import com.example.moneytracker.Navigator;
 ////import com.example.moneytracker.OnTransactionLongClickListener;

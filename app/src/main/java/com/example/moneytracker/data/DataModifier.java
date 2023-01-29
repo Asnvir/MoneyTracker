@@ -1,5 +1,6 @@
-package com.example.moneytracker;
+package com.example.moneytracker.data;
 
+import com.example.moneytracker.Transaction;
 import com.example.moneytracker.util.Utils;
 import com.google.firebase.database.DataSnapshot;
 
@@ -28,20 +29,20 @@ public class DataModifier {
 //        return new ModifiedData(transactions);
 //    }
 
-    private static ArrayList<TransactionModel> getTransactions(DataSnapshot dataSnapshot) {
-        ArrayList<TransactionModel> transactions = new ArrayList<>();
+    private static ArrayList<Transaction> getTransactions(DataSnapshot dataSnapshot) {
+        ArrayList<Transaction> transactions = new ArrayList<>();
         for (DataSnapshot transactionSnapshot : dataSnapshot.getChildren()) {
-            TransactionModel model = transactionSnapshot.getValue(TransactionModel.class);
+            Transaction model = transactionSnapshot.getValue(Transaction.class);
             transactions.add(model);
         }
         return transactions;
     }
 
-    private static void sortTransactions(ArrayList<TransactionModel> transactions) {
+    private static void sortTransactions(ArrayList<Transaction> transactions) {
         Collections.sort(transactions, sortByDateAndTime);
     }
 
-    private static Comparator<TransactionModel> sortByDateAndTime = (o1, o2) -> {
+    private static Comparator<Transaction> sortByDateAndTime = (o1, o2) -> {
         int dateCompare = o2.getDate().compareTo(o1.getDate());
         if (dateCompare == 0) {
             return o2.getTime().compareTo(o1.getTime());
@@ -50,11 +51,11 @@ public class DataModifier {
         }
     };
 
-    private static Map<String, Double> calculateExpenseIncomeBalance(ArrayList<TransactionModel> transactions) {
+    private static Map<String, Double> calculateExpenseIncomeBalance(ArrayList<Transaction> transactions) {
         double generalExpense = 0;
         double generalIncome = 0;
         double generalBalance;
-        for (TransactionModel model : transactions) {
+        for (Transaction model : transactions) {
             double amount = model.getAmount();
             String type = model.getType();
             if (type.equalsIgnoreCase(Utils.EXPENSE)) {

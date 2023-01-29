@@ -6,24 +6,23 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.moneytracker.DatabaseHandler;
-import com.example.moneytracker.InputValidator;
-import com.example.moneytracker.MySignal;
-import com.example.moneytracker.TransactionModel;
+import com.example.moneytracker.data.DatabaseHandler;
+import com.example.moneytracker.util.InputValidator;
+import com.example.moneytracker.util.MySignal;
+import com.example.moneytracker.Transaction;
 import com.example.moneytracker.interfaces.DownloadCallback;
 import com.example.moneytracker.interfaces.UploadCallback;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentAddTransactionViewModel extends AndroidViewModel{
+public class AddTransactionViewModel extends AndroidViewModel{
 
     private final MutableLiveData<List<String>> categoriesLiveData = new MutableLiveData<>();
-    private FragmentAddTransactionViewHolder.AddFragmentNavigation addFragmentNavigation;
+    private AddTransactionHolder.AddFragmentNavigation addFragmentNavigation;
 
-    private final UploadCallback uploadCallback = new UploadCallback() {
+    private final UploadCallback uploadTransactionCallback = new UploadCallback() {
         @Override
         public void onUploadSuccess() {
             MySignal.getInstance().toast("ADD OK");
@@ -35,6 +34,8 @@ public class FragmentAddTransactionViewModel extends AndroidViewModel{
             MySignal.getInstance().toast("ADD BAD");
         }
     };
+
+
 
     private final DownloadCallback downloadCategoriesCallback = new DownloadCallback() {
         @Override
@@ -51,7 +52,7 @@ public class FragmentAddTransactionViewModel extends AndroidViewModel{
 
 
 
-    public FragmentAddTransactionViewModel(@NonNull Application application) {
+    public AddTransactionViewModel(@NonNull Application application) {
         super(application);
         downloadCategories();
     }
@@ -60,18 +61,18 @@ public class FragmentAddTransactionViewModel extends AndroidViewModel{
         DatabaseHandler.getInstance().downloadCategories(downloadCategoriesCallback);
     }
 
-    public void addTransaction(double amount, String note, String category, Boolean isExpense, Boolean isIncome) {
-        if (InputValidator.isValidInput(amount, note, category, isExpense, isIncome)) {
-            TransactionModel transaction = new TransactionModel()
+    public void addTransaction(double amount, String note, String category, String type) {
+        if (InputValidator.isValidInput(amount, note, category, type)) {
+            Transaction transaction = new Transaction()
                     .setTransactionID()
                     .setDate()
                     .setTime()
                     .setAmount(amount)
                     .setCategory(category)
                     .setNote(note)
-                    .setType(isExpense, isIncome);
+                    .setType(type);
 
-           DatabaseHandler.getInstance().uploadTransaction(transaction,uploadCallback);
+           DatabaseHandler.getInstance().uploadTransaction(transaction, uploadTransactionCallback);
 
         }
     }
@@ -89,7 +90,7 @@ public class FragmentAddTransactionViewModel extends AndroidViewModel{
     }
 
 
-    public void setListener(FragmentAddTransactionViewHolder.AddFragmentNavigation addFragmentNavigation) {
+    public void setListener(AddTransactionHolder.AddFragmentNavigation addFragmentNavigation) {
         this.addFragmentNavigation = addFragmentNavigation;
     }
 }

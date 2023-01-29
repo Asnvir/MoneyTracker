@@ -1,14 +1,9 @@
-package com.example.moneytracker;
-
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
+package com.example.moneytracker.util;
 
 public  class InputValidator {
     
 
-    public static boolean isValidInput(double amount,String  note,String category,Boolean isExpense,Boolean isIncome) {
+    public static boolean isValidInput(double amount,String  note,String category,String type) {
         boolean isValid = true;
 
         String errorMessage = "";
@@ -24,7 +19,7 @@ public  class InputValidator {
             errorMessage = errorMessage + "Please select a valid category\n";
             isValid = false;
         }
-        if (!isExpense && !isIncome) {
+        if (type.isEmpty()) {
             errorMessage = errorMessage + "Please select an expense or income\n";
             isValid = false;
         }

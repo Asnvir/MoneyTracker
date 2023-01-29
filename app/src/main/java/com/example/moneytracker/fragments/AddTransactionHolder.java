@@ -12,23 +12,25 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 
-import com.example.moneytracker.MySignal;
+import com.example.moneytracker.R;
+import com.example.moneytracker.util.MySignal;
 import com.example.moneytracker.databinding.FragmentAddTransactionBinding;
 import com.example.moneytracker.navigation.FragmentHelper;
 import com.example.moneytracker.navigation.Navigator;
+import com.example.moneytracker.util.Utils;
 
 import java.util.List;
 
-public class FragmentAddTransactionViewHolder extends Fragment {
+public class AddTransactionHolder extends Fragment {
 
     public interface AddFragmentNavigation{
         void goBack();
         void openDashBoard();
     }
     private FragmentAddTransactionBinding binding;
-    private FragmentAddTransactionViewModel viewModel;
+    private AddTransactionViewModel viewModel;
     private Navigator navigator;
-    private AddFragmentNavigation addFragmentNavigation = new AddFragmentNavigation() {
+    private final AddFragmentNavigation addFragmentNavigation = new AddFragmentNavigation() {
         @Override
         public void goBack() {
 
@@ -43,7 +45,7 @@ public class FragmentAddTransactionViewHolder extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(requireActivity()).get(FragmentAddTransactionViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(AddTransactionViewModel.class);
         viewModel.setListener(addFragmentNavigation);
         navigator = FragmentHelper.navigator(this);
     }
@@ -74,16 +76,6 @@ public class FragmentAddTransactionViewHolder extends Fragment {
             }
         });
 
-        binding.addtransactionCHBXExpense.setOnClickListener(v -> {
-            binding.addtransactionCHBXExpense.setChecked(true);
-            binding.addtransactionCHBXIncome.setChecked(false);
-        });
-
-        binding.addtransactionCHBXIncome.setOnClickListener(v -> {
-            binding.addtransactionCHBXExpense.setChecked(false);
-            binding.addtransactionCHBXIncome.setChecked(true);
-        });
-
 
         binding.addtransactionBTNAdd.setOnClickListener(v -> {
 
@@ -95,10 +87,21 @@ public class FragmentAddTransactionViewHolder extends Fragment {
             }
             String note = binding.addtransactionTXTNote.getText().toString();
             String category = (String) binding.addtransactionSPINNERCategory.getSelectedItem();
-            Boolean isExpense = binding.addtransactionCHBXExpense.isChecked();
-            Boolean isIncome = binding.addtransactionCHBXIncome.isChecked();
-            viewModel.addTransaction(amount, note, category, isExpense, isIncome);
+            String type = getSelectedRadioButtonText();
+            viewModel.addTransaction(amount, note, category, type);
         });
     }
+
+    public String getSelectedRadioButtonText() {
+        int checkedId = binding.addtransactionRGExpenseIncome.getCheckedRadioButtonId();
+        if (checkedId == R.id.addtransaction_RB_expense) {
+            return Utils.EXPENSE;
+        } else if (checkedId == R.id.addtransaction_RB_income) {
+            return Utils.INCOME;
+        } else {
+            return "";
+        }
+    }
+
 
 }

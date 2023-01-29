@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.FragmentAddTransactionViewHolder">
+    tools:context=".fragments.AddTransactionHolder">
 
 
     <RelativeLayout
@@ -72,22 +72,31 @@
         android:weightSum="2"
         android:gravity="center"
         android:layout_marginHorizontal="15dp">
-        <CheckBox
-            android:id="@+id/addtransaction_CHBX_expense"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Expense"
-            android:gravity="center"/>
 
-        <CheckBox
-            android:id="@+id/addtransaction_CHBX_income"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+        <RadioGroup
+            android:id="@+id/addtransaction_RG_expense_income"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Income"
-            android:gravity="center"/>
+            android:orientation="horizontal">
 
+            <RadioButton
+                android:id="@+id/addtransaction_RB_expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expense"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/addtransaction_RB_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Income"
+                android:gravity="center"
+                android:layout_weight="1" />
+
+        </RadioGroup>
     </LinearLayout>
 
     <Button

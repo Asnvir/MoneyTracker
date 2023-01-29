@@ -8,5 +8,11 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
 
+    <string name="main_title">Money tracker</string>
+
+    <string name="income_message">Income: %s</string>
+    <string name="balance_message">Balance: %s</string>
+    <string name="expense_message">Expense: %s</string>
+
 
 </resources>

@@ -1,4 +1,4 @@
-package com.example.moneytracker;
+package com.example.moneytracker.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
+import com.example.moneytracker.data.StorageHandler;
 
 public class MyImage {
     @SuppressLint("StaticFieldLeak")

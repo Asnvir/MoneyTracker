@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
+import com.example.moneytracker.activities.MainActivityHolder;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SignInActivity extends AppCompatActivity {
@@ -81,7 +81,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void openDashBoardActivity() {
-        Intent intent = new Intent(SignInActivity.this,DashBoardActivity.class);
+        Intent intent = new Intent(SignInActivity.this, MainActivityHolder.class);
         finish();
         startActivity(intent);
     }

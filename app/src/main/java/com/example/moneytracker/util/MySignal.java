@@ -1,4 +1,4 @@
-package com.example.moneytracker;
+package com.example.moneytracker.util;
 
 import android.content.Context;
 import android.os.Build;

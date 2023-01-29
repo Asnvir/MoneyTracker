@@ -1,7 +1,8 @@
-package com.example.moneytracker;
+package com.example.moneytracker.data;
 
 import androidx.annotation.NonNull;
 
+import com.example.moneytracker.Transaction;
 import com.example.moneytracker.interfaces.DownloadCallback;
 import com.example.moneytracker.interfaces.UploadCallback;
 import com.example.moneytracker.util.Utils;
@@ -43,7 +44,7 @@ public class DatabaseHandler {
         return instance;
     }
 
-    public void uploadTransaction(TransactionModel transaction, UploadCallback callback) {
+    public void uploadTransaction(Transaction transaction, UploadCallback callback) {
         HashMap<String, Object> transactionToDB = convertTransaction(transaction);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -59,9 +60,7 @@ public class DatabaseHandler {
                  @Override
                  public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            if (callback != null){
-                                callback.onUploadSuccess();
-                            }
+                            updateBalance(callback,transaction);
 
                         }else{
                             Exception exception = task.getException();
@@ -78,7 +77,86 @@ public class DatabaseHandler {
 
     }
 
-    private HashMap<String, Object> convertTransaction(TransactionModel transaction) {
+    private void updateBalance(UploadCallback callback, Transaction transaction){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null){
+            String currentUserUID = user.getUid();
+            dbRef = database.getReference()
+                    .child(Utils.NODE_USERS)
+                    .child(currentUserUID)
+                    .child(Utils.NODE_AMOUNT);
+            retrieveAmountFromDB(callback, transaction);
+        }
+    }
+
+    private void retrieveAmountFromDB(UploadCallback callback,  Transaction transaction) {
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                double balance = getDoubleValue(dataSnapshot, Utils.NODE_BALANCE);
+                double expense = getDoubleValue(dataSnapshot, Utils.NODE_EXPENSE);
+                double income = getDoubleValue(dataSnapshot, Utils.NODE_INCOME);
+                updateAmountValues(callback, transaction, balance, expense, income);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                if (callback != null) {
+                    callback.onUploadError(error.getMessage());
+                }
+            }
+        });
+    }
+
+    private double getDoubleValue(DataSnapshot dataSnapshot, String fieldName) {
+        Double value = dataSnapshot.child(fieldName).getValue(Double.class);
+        if(value == null){
+            return 0.0;
+        }
+        return value;
+    }
+
+
+
+
+
+    private void updateAmountValues(UploadCallback callback, Transaction transaction, double balance, double expense, double income) {
+        if (transaction.getType().equals(Utils.EXPENSE)){
+            balance = balance - transaction.getAmount();
+            expense = expense + transaction.getAmount();
+        }else if(transaction.getType().equals(Utils.INCOME)){
+            balance = balance + transaction.getAmount();
+            income = income + transaction.getAmount();
+        }
+        Map<String, Object> amountValues = new HashMap<>();
+        amountValues.put(Utils.NODE_BALANCE, balance);
+        amountValues.put(Utils.NODE_EXPENSE, expense);
+        amountValues.put(Utils.NODE_INCOME, income);
+        updateAmountInDB(callback, amountValues);
+    }
+
+    private void updateAmountInDB(UploadCallback callback, Map<String, Object> amountValues) {
+        dbRef.updateChildren(amountValues).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    if (callback != null) {
+                        callback.onUploadSuccess();
+                    }
+                }else {
+                    Exception exception = task.getException();
+                    if (exception != null) {
+                        String errorMessage = exception.getMessage();
+                        if (callback != null) {
+                            callback.onUploadError(errorMessage);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private HashMap<String, Object> convertTransaction(Transaction transaction) {
         HashMap<String, Object> transactionToDB = new HashMap<>();
         transactionToDB.put(Utils.TRANSACTIONID, transaction.getTransactionID());
         transactionToDB.put(Utils.DATE, transaction.getDate());
@@ -136,6 +214,28 @@ public class DatabaseHandler {
         });
     }
 
+    public void downloadAmounts(DownloadCallback callback) {
+        String currentUserUID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        dbRef = database.getReference().child(Utils.NODE_USERS).child(currentUserUID).child(Utils.NODE_AMOUNT);
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (callback != null){
+                    callback.onDownloadSuccess(dataSnapshot);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                if (callback != null){
+                    callback.onDownloadError(error.getMessage());
+                }
+
+            }
+        });
+    }
+
 
 
     public Task<Void> uploadData(Map<String, Object> data, String child) {
@@ -148,6 +248,7 @@ public class DatabaseHandler {
         dbRef = database.getReference().child(child);
         dbRef.removeValue();
     }
+
 
 
 }

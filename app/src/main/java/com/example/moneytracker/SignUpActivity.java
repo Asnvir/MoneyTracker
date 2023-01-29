@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.moneytracker.activities.MainActivityHolder;
+
 public class SignUpActivity extends AppCompatActivity implements OnUserCreationListener  {
 
     private EditText txt_email;
@@ -80,7 +82,7 @@ public class SignUpActivity extends AppCompatActivity implements OnUserCreationL
     }
 
     private void openDashBoardActivity() {
-        Intent intent = new Intent(SignUpActivity.this,DashBoardActivity.class);
+        Intent intent = new Intent(SignUpActivity.this, MainActivityHolder.class);
         finish();
         startActivity(intent);
     }

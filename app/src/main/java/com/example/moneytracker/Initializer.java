@@ -2,13 +2,11 @@ package com.example.moneytracker;
 
 import android.app.Application;
 
-import com.example.moneytracker.MyImage;
-import com.example.moneytracker.MySignal;
-import com.example.moneytracker.DatabaseHandler;
-import com.example.moneytracker.StorageHandler;
+import com.example.moneytracker.data.DatabaseHandler;
+import com.example.moneytracker.data.StorageHandler;
+import com.example.moneytracker.util.MyImage;
+import com.example.moneytracker.util.MySignal;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class Initializer extends Application {
     @Override

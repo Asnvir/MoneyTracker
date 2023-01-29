@@ -19,7 +19,7 @@
         android:theme="@style/Theme.MoneyTracker"
         tools:targetApi="31">
         <activity
-            android:name=".fragments.FragmentEditTransactionViewHolder"
+            android:name=".fragments.EditTransactionHolder"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -33,7 +33,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".DashBoardActivity"
+            android:name=".activities.MainActivityHolder"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

@@ -14,7 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.moneytracker.TransactionModel;
+import com.example.moneytracker.Transaction;
 import com.google.gson.Gson;
 
 
@@ -26,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 //public class FragmentEditTransaction extends Fragment implements BaseTransactionCallbackListener
-public class FragmentEditTransactionViewHolder extends Fragment {
+public class EditTransactionHolder extends Fragment {
 
     EditText txt_amount;
     Spinner spnr_category;
@@ -48,13 +48,13 @@ public class FragmentEditTransactionViewHolder extends Fragment {
     private FragmentEditTransactionBinding binding;
 
 
-    private TransactionModel transactionModel;
+    private Transaction transaction;
 
 
     String[] categories = {"Food", "Other", "Salary", "Shopping", "Subscription", "Transportation"};
 
-    public static FragmentEditTransactionViewHolder newInstance(String jsonTransaction) {
-        FragmentEditTransactionViewHolder fragment = new FragmentEditTransactionViewHolder();
+    public static EditTransactionHolder newInstance(String jsonTransaction) {
+        EditTransactionHolder fragment = new EditTransactionHolder();
         Bundle args = new Bundle();
         args.putString("jsonTransaction", jsonTransaction);
         fragment.setArguments(args);
@@ -67,7 +67,7 @@ public class FragmentEditTransactionViewHolder extends Fragment {
         if (getArguments() != null) {
             Gson gson = new Gson();
             String jsonTransaction = getArguments().getString("jsonTransaction");
-            transactionModel = gson.fromJson(jsonTransaction, TransactionModel.class);
+            transaction = gson.fromJson(jsonTransaction, Transaction.class);
         }
     }
 
@@ -105,10 +105,10 @@ public class FragmentEditTransactionViewHolder extends Fragment {
 
 
 //        curr_txt_amount = transactionModel.getAmount();
-        curr_txt_category = transactionModel.getCategory();
-        curr_txt_note = transactionModel.getNote();
-        curr_txt_type = transactionModel.getType();
-        curr_txt_transactionID = transactionModel.getTransactionID();
+        curr_txt_category = transaction.getCategory();
+        curr_txt_note = transaction.getNote();
+        curr_txt_type = transaction.getType();
+        curr_txt_transactionID = transaction.getTransactionID();
     }
 
     private void inputCurrentValues() {

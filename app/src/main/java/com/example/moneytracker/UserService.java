@@ -2,6 +2,7 @@ package com.example.moneytracker;
 
 import android.widget.Toast;
 
+import com.example.moneytracker.util.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,12 +22,16 @@ public class UserService {
     }
 
     public void initializeUser(String uid) {
-        DatabaseReference userRef = firebaseDatabase.getReference("users/" + uid + "/amount");
-        Map<String, Object> values = new HashMap<>();
-        values.put("expense", 0);
-        values.put("income", 0);
-        values.put("balance", 0);
-        userRef.updateChildren(values);
+//        DatabaseReference userRef = firebaseDatabase.getReference("users/" + uid + "/amount");
+        DatabaseReference userRef = firebaseDatabase.getReference(Utils.NODE_USERS + "/" + uid + "/" + Utils.NODE_AMOUNT);
+//
+//        Map<String, Object> values = new HashMap<>();
+//        values.put(Utils.INCOME, 0.0);
+//        values.put(Utils.BALANCE, 0.0);
+//        values.put(Utils.EXPENSE, 0.0);
+        userRef.child(Utils.INCOME).setValue(0.0);
+        userRef.child(Utils.BALANCE).setValue(0.0);
+        userRef.child(Utils.EXPENSE).setValue(0.0);
 
     }
 

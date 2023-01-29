@@ -3,9 +3,7 @@ package com.example.moneytracker;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +15,8 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moneytracker.databinding.OneItemRecyclerViewBinding;
+import com.example.moneytracker.not_use.OnTransactionLongClickListener;
+import com.example.moneytracker.util.MyImage;
 import com.example.moneytracker.util.Utils;
 import com.google.gson.Gson;
 
@@ -25,11 +25,11 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class TransactionAdapter extends ListAdapter<TransactionModel, TransactionAdapter.TransactionViewHolder> {
+public class TransactionAdapter extends ListAdapter<Transaction, TransactionAdapter.TransactionViewHolder> {
 
 
     private Context context;
-    private ArrayList<TransactionModel> transactionModelArrayList;
+    private ArrayList<Transaction> transactionArrayList;
     private OnTransactionLongClickListener onTransactionLongClickListener;
 
 //    public TransactionAdapter(Context context, ArrayList<TransactionModel> transactionModelArrayList, OnTransactionLongClickListener onTransactionLongClickListener) {
@@ -42,25 +42,25 @@ public class TransactionAdapter extends ListAdapter<TransactionModel, Transactio
     public TransactionAdapter() {
         super(DIFF_CALLBACK);
     }
-    private static final DiffUtil.ItemCallback<TransactionModel> DIFF_CALLBACK = new DiffUtil.ItemCallback<TransactionModel>() {
+    private static final DiffUtil.ItemCallback<Transaction> DIFF_CALLBACK = new DiffUtil.ItemCallback<Transaction>() {
         @Override
-        public boolean areItemsTheSame(@NonNull TransactionModel oldItem, @NonNull TransactionModel newItem) {
+        public boolean areItemsTheSame(@NonNull Transaction oldItem, @NonNull Transaction newItem) {
             return Objects.equals(oldItem.getTransactionID(), newItem.getTransactionID());
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull TransactionModel oldItem, @NonNull TransactionModel newItem) {
+        public boolean areContentsTheSame(@NonNull Transaction oldItem, @NonNull Transaction newItem) {
             return oldItem.equals(newItem);
         }
     };
 
 
-    public void setTransactions(List<TransactionModel> transactionModelArrayList) {
-        this.transactionModelArrayList = (ArrayList<TransactionModel>) transactionModelArrayList;
+    public void setTransactions(List<Transaction> transactionArrayList) {
+        this.transactionArrayList = (ArrayList<Transaction>) transactionArrayList;
     }
 
-    public ArrayList<TransactionModel> getTransactionModelArrayList() {
-        return transactionModelArrayList;
+    public ArrayList<Transaction> getTransactionModelArrayList() {
+        return transactionArrayList;
     }
 
     public void setOnTransactionLongClickListener(OnTransactionLongClickListener onTransactionLongClickListener) {
@@ -90,7 +90,7 @@ public class TransactionAdapter extends ListAdapter<TransactionModel, Transactio
             @Override
             public boolean onLongClick(View v) {
                 int currentPosition = holder.getBindingAdapterPosition();
-                TransactionModel model = transactionModelArrayList.get(currentPosition);
+                Transaction model = transactionArrayList.get(currentPosition);
                 Gson gson = new Gson();
                 String jsonTransaction = gson.toJson(model);
 
@@ -112,13 +112,13 @@ public class TransactionAdapter extends ListAdapter<TransactionModel, Transactio
                 return true;
             }
         });
-        TransactionModel transactionModel = transactionModelArrayList.get(position);
-        setNote(holder, transactionModel.getNote());
-        setAmount(holder, transactionModel.getAmount(),transactionModel.getCategory());
-        setDate(holder, transactionModel.getDate());
-        setTime(holder, transactionModel.getTime());
-        setCategory(holder, transactionModel.getCategory());
-        setImageCategory(holder, transactionModel);
+        Transaction transaction = transactionArrayList.get(position);
+        setNote(holder, transaction.getNote());
+        setAmount(holder, transaction.getAmount(), transaction.getCategory());
+        setDate(holder, transaction.getDate());
+        setTime(holder, transaction.getTime());
+        setCategory(holder, transaction.getCategory());
+        setImageCategory(holder, transaction);
     }
 
     private void setNote(@NonNull TransactionViewHolder holder, String new_note) {
@@ -152,7 +152,7 @@ public class TransactionAdapter extends ListAdapter<TransactionModel, Transactio
         holder.binding.oneitemTXTCategory.setText(new_category);
     }
 
-    private void setImageCategory(@NonNull TransactionViewHolder holder, TransactionModel model) {
+    private void setImageCategory(@NonNull TransactionViewHolder holder, Transaction model) {
         String category = model.getCategory().toLowerCase();
         MyImage.getInstance().loadCategoryImage(context, holder.binding.oneitemIMGCategory, category, holder.binding.oneitemPBLoading);
     }
@@ -160,7 +160,7 @@ public class TransactionAdapter extends ListAdapter<TransactionModel, Transactio
 
     @Override
     public int getItemCount() {
-        return transactionModelArrayList != null ? transactionModelArrayList.size() : 0;
+        return transactionArrayList != null ? transactionArrayList.size() : 0;
     }
 
     public static class TransactionViewHolder extends RecyclerView.ViewHolder {

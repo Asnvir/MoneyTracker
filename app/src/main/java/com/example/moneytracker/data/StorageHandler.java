@@ -1,9 +1,10 @@
-package com.example.moneytracker;
+package com.example.moneytracker.data;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 
+import com.example.moneytracker.util.MySignal;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
