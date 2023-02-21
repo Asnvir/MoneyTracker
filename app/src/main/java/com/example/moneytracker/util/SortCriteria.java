@@ -1,0 +1,8 @@
+package com.example.moneytracker.util;
+
+public enum SortCriteria {
+    DATE_ASCENDING, DATE_DESCENDING,
+    AMOUNT_ASCENDING, AMOUNT_DESCENDING,
+    CATEGORY_ASCENDING, CATEGORY_DESCENDING,
+    TYPE_ASCENDING,  TYPE_DESCENDING
+}

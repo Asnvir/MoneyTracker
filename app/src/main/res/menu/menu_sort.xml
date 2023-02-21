@@ -1,0 +1,45 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_sort"
+        android:title=""
+        android:icon="@drawable/ic_sort"
+        app:showAsAction="always">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/menu_date_asc"
+                    android:title="@string/menu_by_date_asc"
+                    android:actionLayout="@layout/menu_item_layout" />
+                <item
+                    android:id="@+id/menu_date_desc"
+                    android:title="@string/menu_by_date_desc"
+                    android:actionLayout="@layout/menu_item_layout" />
+                <item
+                    android:id="@+id/menu_amount_asc"
+                    android:title="@string/menu_by_amount_asc"
+                    android:actionLayout="@layout/menu_item_layout" />
+                <item
+                    android:id="@+id/menu_amount_desc"
+                    android:title="@string/menu_by_amount_desc"
+                    android:actionLayout="@layout/menu_item_layout" />
+                <item
+                    android:id="@+id/menu_category_asc"
+                    android:title="@string/menu_by_category"
+                    android:actionLayout="@layout/menu_item_layout" />
+                <item
+                    android:id="@+id/menu_category_desc"
+                    android:title="@string/menu_by_category_desc"
+                    android:actionLayout="@layout/menu_item_layout" />
+                <item
+                    android:id="@+id/menu_type_asc"
+                    android:title="@string/menu_by_type_asc"
+                    android:actionLayout="@layout/menu_item_layout" />
+                <item
+                    android:id="@+id/menu_type_desc"
+                    android:title="@string/menu_by_type_desc"
+                    android:actionLayout="@layout/menu_item_layout" />
+            </group>
+        </menu>
+    </item>
+</menu>

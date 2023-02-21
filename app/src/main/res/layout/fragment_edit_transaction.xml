@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".mainScreen.EditTransactionFragment">
+
+
+    <ProgressBar
+        android:id="@+id/edd_transaction_PGB_progressbar"
+        style="@style/Widget.MaterialComponents.CircularProgressIndicator"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:indeterminateTint="#603a91"
+        android:indeterminateTintMode="src_atop"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="40dp"
+        android:background="#00000000"
+        android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/edd_transaction_TXT_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:maxWidth="250dp"
+        android:text="@string/edd_transaction"
+        android:textAlignment="center"
+        android:textColor="#603a91"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edd_transaction_TXT_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="@string/amount"
+        android:inputType="number"
+        android:background="@drawable/edittext_background"
+        android:maxWidth="488dp"
+        android:minHeight="48dp"
+        android:padding="8dp"
+        android:textColor="#603a91"
+        android:textColorHint="#603a91"
+         />
+
+    <Spinner
+        android:id="@+id/edd_transaction_SPINNER_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="@string/category"
+        android:background="@drawable/edittext_background"
+        android:maxWidth="488dp"
+        android:minHeight="48dp"
+        android:padding="8dp"
+        android:textColor="#603a91"
+        android:textColorHint="#603a91"
+        android:contentDescription="@string/category"
+        tools:ignore="ContentDescription" />
+
+    <EditText
+        android:id="@+id/edd_transaction_TXT_Note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="@string/note"
+        android:inputType="text"
+        android:background="@drawable/edittext_background"
+        android:maxWidth="488dp"
+        android:minHeight="48dp"
+        android:padding="8dp"
+        android:textColor="#603a91"
+        android:textColorHint="#603a91"
+         />
+
+    <RadioGroup
+        android:id="@+id/edd_transaction_RG_expense_income"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/edd_transaction_RB_expense"
+            android:layout_width="wrap_content"
+            android:maxWidth="250dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:gravity="center"
+            android:text="@string/expense" />
+
+        <RadioButton
+            android:id="@+id/edd_transaction_RB_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxWidth="250dp"
+            android:gravity="center"
+            android:text="@string/income" />
+
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/edd_transaction_BTN_edit"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/background_btn_1"
+        android:backgroundTint="#603a91"
+        android:text="@string/edd_btn"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/edd_transaction_BTN_delete"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/background_btn_2"
+        android:text="@string/delete_btn"
+        android:textColor="#603a91"
+        android:textStyle="bold" />
+
+    </LinearLayout>
+</RelativeLayout>

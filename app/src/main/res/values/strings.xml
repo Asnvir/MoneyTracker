@@ -1,0 +1,100 @@
+<resources>
+    <string name="app_name">MoneyTracker</string>
+    <string-array name="options">
+        <item>Edit</item>
+        <item>Delete</item>
+    </string-array>
+
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+
+    <string name="main_title">Money tracker</string>
+
+    <string name="income_message">Income: %s</string>
+    <string name="balance_message">Balance: %s</string>
+    <string name="expense_message">Expense: %s</string>
+    <string name="forgot_password_title">Forgot password</string>
+    <string name="forgot_password_message">Enter your email address to reset your password</string>
+    <string name="forgot_password_email_hint">Email address</string>
+    <string name="forgot_password_button">Reset password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">LOGIN</string>
+    <string name="register">Register</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_with_google">Login with Google</string>
+    <string name="are_you_a_new_user_register">Are you a new user? Register</string>
+    <string name="create_account">Create \nAccount</string>
+    <string name="name">Name</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="money_tracker">Money Tracker</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="have_already_account">Have already account? Login</string>
+    <string name="intro_image">intro_image</string>
+    <string name="logo_image">logo_image</string>
+    <string name="add">Add</string>
+    <string name="income_0">Income: 0</string>
+    <string name="balance_0">Balance: 0</string>
+    <string name="expense_0">Expense: 0</string>
+    <string name="action_sort">sort</string>
+    <string name="date_asc">Date ASC</string>
+    <string name="amount_asc">Amount ASC</string>
+    <string name="date_desc">Date DESC</string>
+    <string name="amount_desc">AmountDesc</string>
+    <string name="category_asc">Category ASC</string>
+    <string name="category_desc">Category DESC</string>
+    <string name="type_asc">Type ASC</string>
+    <string name="type_desc">Type DESC</string>
+    <string name="fragment_navigation_example">Money Tracker</string>
+    <string name="dashboard_title">Dashboard</string>
+    <string name="sort_transactions">sort_transactions</string>
+    <string name="sort">sorting_transactions</string>
+    <string name="menu_by_date_asc">Date ASC</string>
+    <string name="menu_by_date_desc">Date DESC</string>
+    <string name="menu_by_amount_asc">Amount ASC</string>
+    <string name="menu_by_amount_desc">Amount Desc</string>
+    <string name="menu_by_category">Category ASC</string>
+    <string name="menu_by_category_desc">Category DESC</string>
+    <string name="menu_by_type_asc">Type ASC</string>
+    <string name="menu_by_type_desc">Type DESC</string>
+    <string name="sort_title">Sort By</string>
+    <string-array name="sort_options">
+        <item>Date (Ascending)</item>
+        <item>Date (Descending)</item>
+        <item>Amount (Ascending)</item>
+        <item>Amount (Descending)</item>
+        <item>Category (Ascending)</item>
+        <item>Category (Descending)</item>
+        <item>Type (Ascending)</item>
+        <item>Type (Descending)</item>
+    </string-array>
+    <string name="fab_scroll_behavior">com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior</string>
+    <string name="add_btn">add_btn</string>
+    <string name="img_background">img_background</string>
+    <string name="image_btn_rgst">image_btn_rgst</string>
+    <string name="transportation">Transportation</string>
+    <string name="_18_01_2023">18/01/2023</string>
+    <string name="_00_11">00:11</string>
+    <string name="_120000">-$120000</string>
+    <string name="buy_some_grocery">Buy some grocery</string>
+    <string name="image_category">image_category</string>
+    <string name="image_bck">image_bck</string>
+    <string name="image_login">image_login</string>
+    <string name="add_button">Add</string>
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
+    <string name="note">Note</string>
+    <string name="category">Category</string>
+    <string name="amount">Amount</string>
+    <string name="add_transaction">Add Transaction</string>
+    <string name="edd_transaction">Edit \ntransaction</string>
+    <string name="edd_btn">Edit</string>
+    <string name="delete_btn">Delete</string>
+    <string name="log_out">Logut</string>
+    <string name="balance">Balance</string>
+    <string name="_0">0</string>
+
+
+</resources>
