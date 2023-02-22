@@ -1,9 +1,8 @@
 package com.example.moneytracker.contract;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.StringRes;
+import java.util.List;
 
 public interface HasCustomAction {
-    CustomAction getCustomAction();
+    List<CustomAction> getCustomActions();
 }
 

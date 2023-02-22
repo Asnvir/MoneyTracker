@@ -11,13 +11,8 @@ public class Initializer extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // TODO: 18.02.2023
-//        MyImage.init();
         MySignal.init(this);
         FirebaseApp.initializeApp(this);
-        // TODO: 18.02.2023
-//        StorageHandler.init();
+
     }
-
-
 }

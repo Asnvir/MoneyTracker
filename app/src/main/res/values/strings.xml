@@ -95,6 +95,14 @@
     <string name="log_out">Logut</string>
     <string name="balance">Balance</string>
     <string name="_0">0</string>
+    <string name="action_settings">action_settings</string>
+    <string name="edit_title">Edit transaction</string>
+    <string name="add_transaction_title">Add transaction</string>
+    <string name="settings_title">Settings</string>
+    <string name="delete_account">Delete account</string>
+    <string name="balance_label">Balance: %s</string>
+    <string name="income_label">Income: %s</string>
+    <string name="expense_label">Expense: %s</string>
 
 
 </resources>

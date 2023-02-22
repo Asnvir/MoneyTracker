@@ -11,7 +11,6 @@ public class UserInfoModel {
     private String email;
 
     public UserInfoModel() {
-        // Required default constructor for Firebase Realtime Database
     }
 
     public UserInfoModel(String uid, String name, String email) {
@@ -42,14 +41,6 @@ public class UserInfoModel {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put(Constants.NODE_UID, uid);
-        result.put(Constants.NODE_NAME, name);
-        result.put(Constants.NODE_EMAIL, email);
-        return result;
     }
 
 }

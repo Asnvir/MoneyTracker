@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".mainScreen.AddTransactionFragment">
+    tools:context=".screens.mainScreen.AddTransactionFragment">
 
 
     <ProgressBar
@@ -44,9 +44,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
+            android:autofillHints="@string/amount"
             android:background="@drawable/edittext_background"
             android:hint="@string/amount"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:maxWidth="488dp"
             android:minHeight="48dp"
             android:padding="8dp"
@@ -64,13 +65,15 @@
             android:minHeight="48dp"
             android:padding="8dp"
             android:textColor="#603a91"
-            android:textColorHint="#603a91" />
+            android:textColorHint="#603a91"
+            tools:ignore="LabelFor" />
 
         <EditText
             android:id="@+id/addtransaction_TXT_Note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:autofillHints="@string/note"
             android:background="@drawable/edittext_background"
             android:hint="@string/note"
             android:inputType="text"
@@ -94,6 +97,7 @@
                 android:layout_weight="1"
                 android:checked="true"
                 android:gravity="center"
+                android:maxWidth="200dp"
                 android:text="@string/expense" />
 
             <RadioButton
@@ -102,6 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:maxWidth="200dp"
                 android:text="@string/income" />
 
         </RadioGroup>
@@ -117,6 +122,6 @@
             android:backgroundTint="#603a91"
             android:text="@string/add_button"
             android:textColor="@color/white"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>

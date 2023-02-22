@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".startScreen.RegisterFragment">
+    tools:context=".screens.startScreen.RegisterFragment">
 
     <ProgressBar
         android:id="@+id/register_PGB_progressbar"
@@ -16,7 +16,7 @@
         android:indeterminate="true"
         android:indeterminateTint="#603a91"
         android:indeterminateTintMode="src_atop"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"

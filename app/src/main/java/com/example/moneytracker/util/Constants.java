@@ -2,7 +2,6 @@ package com.example.moneytracker.util;
 
 public class Constants {
 
-
     public static final String NODE_CATEGORIES = "categories";
     public static final String NODE_USERS = "users";
 
@@ -35,32 +34,11 @@ public class Constants {
     public static final String IMAGES_PATH = "images/categories/";
     public static final String IMAGE_EXTENSION = ".png";
 
-
-    public static final String DASHBOARD = "Dashboard";
-    public static final String ADD_TRANSACTION = "Add transaction";
-    public static final String Edit_TRANSACTION = "Edit transaction";
-    public static final String Settings = "Settings";
-
-
     public static final String GOOGLE_SIGN_IN_WEB_CLIENT_ID = "340863482586-ji157vcnc3qbq81rd3td209m8ougshdg.apps.googleusercontent.com";
     public static final String DEFAULT_NAME = "Default name";
     public static final String TAG_BUNDLE_TRANSACTION_MODEL = "transactionModel";
 
 
-    public static final String GoogleSignInWrapper_TAG = "GoogleSignInWrapper";
-    public static final String SignInViewModel_TAG = "SignInViewModel";
-    public static final String AuthDataService_TAG = "AuthDataService";
-    public static final String StartActivityGoBack_TAG = "goBack";
-    public static final String OnBackPressed_TAG = "onBackPressed";
-    public static final String AddTransactionViewModel_TAG = "AddTransactionViewModel";
-    public static final String UserDataService_TAG = "UserDataService";
-    public static final String DatabaseHandler_TAG = "DatabaseHandler";
-    public static final String DashboardViewModel_TAG = "DashboardViewModel";
     public static final String DashboardFragment_TAG = "DashboardFragment_TAG";
-    public static final String MainActivity_TAG = "MainActivityTAG";
-    public static final String EditTransactionViewModel_TAG = "EditTransactionViewModel_TAG";
-    public static final String EditTransaction_TAG = "EditTransaction_TAG";
 
-
-    public static final String TAG_MYSIGNAL = "MySignal";
 }

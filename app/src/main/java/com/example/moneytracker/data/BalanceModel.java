@@ -3,9 +3,6 @@ package com.example.moneytracker.data;
 import com.example.moneytracker.util.Constants;
 import com.google.firebase.database.PropertyName;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class BalanceModel {
     @PropertyName(Constants.NODE_INCOME)
     private double income;
@@ -45,14 +42,6 @@ public class BalanceModel {
 
     public void setExpense(double expense) {
         this.expense = expense;
-    }
-
-    public Map<String, Object> toMap() {
-        Map<String, Object> map = new HashMap<>();
-        map.put(Constants.NODE_INCOME, income);
-        map.put(Constants.NODE_EXPENSE, expense);
-        map.put(Constants.NODE_BALANCE, balance);
-        return map;
     }
 
 }

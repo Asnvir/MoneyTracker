@@ -5,10 +5,13 @@ import android.app.Activity;
 import androidx.fragment.app.Fragment;
 
 public interface NavigatorStart {
-    void navigateToStart();
+
     void navigateToLogin();
+
     void navigateToRegister();
+
     void navigateToDashboard();
+
     void goBack();
 
     static NavigatorStart getNavigator(Fragment fragment) {

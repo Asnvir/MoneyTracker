@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="40dp"
+        android:contentDescription="@string/intro_image"
         android:scaleType="fitXY"
         android:src="@drawable/intro"
         app:layout_constraintBottom_toTopOf="@+id/start_BTN_login"
@@ -17,18 +18,17 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        android:contentDescription="@string/intro_image" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/start_IMG_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/logo_image"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="@+id/start_IMG_intro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="@string/logo_image" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/start_TXT_logo"

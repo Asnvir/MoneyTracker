@@ -74,7 +74,7 @@ public class TransactionModel implements Parcelable {
         return this;
     }
 
-    public TransactionModel setCategory(String category){
+    public TransactionModel setCategory(String category) {
         this.category = category;
         return this;
     }

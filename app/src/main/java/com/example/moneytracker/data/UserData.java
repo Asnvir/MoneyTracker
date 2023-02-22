@@ -12,7 +12,7 @@ public class UserData {
         this.balanceModel = balanceModel;
     }
 
-    public   List<TransactionModel> getTransactions() {
+    public List<TransactionModel> getTransactions() {
         return transactionModels;
     }
 

@@ -21,7 +21,9 @@
                 android:id="@+id/oneitem_PB_loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:indeterminateTint="#603a91"
+                android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/oneitem_IMG_category"

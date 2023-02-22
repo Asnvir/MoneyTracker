@@ -36,36 +36,44 @@
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/account_TXT_balance"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="@string/balance_0"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/account_TXT_income"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="@string/income_0"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            <TextView
+                android:id="@+id/account_TXT_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@string/balance_0"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
+            <TextView
+                android:id="@+id/account_TXT_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@string/income_0"
+                android:textColor="@color/dark_green"
+                android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/account_TXT_expense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="@string/expense_0"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            <TextView
+                android:id="@+id/account_TXT_expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@string/expense_0"
+                android:textColor="@color/dark_red"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/account_BTN_logout"
@@ -77,7 +85,19 @@
             android:text="@string/log_out"
             android:textColor="#ffffff"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/account_BTN_delete"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/background_btn_2"
+            android:text="@string/delete_account"
+            android:textColor="#603a91"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

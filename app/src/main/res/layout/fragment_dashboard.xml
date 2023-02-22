@@ -5,22 +5,42 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
+
+    <ProgressBar
+        android:id="@+id/dashboard_PGB_progressbar"
+        style="@style/Widget.MaterialComponents.CircularProgressIndicator"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:indeterminateTint="#603a91"
+        android:indeterminateTintMode="src_atop"
+        android:visibility="gone" />
+
     <LinearLayout
         android:id="@+id/dashBoard_LL_income_balance_expense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginHorizontal="10dp"
         android:background="@drawable/edittext_background"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:gravity="start"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/dashBoard_TXT_income"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/income_0" />
+            android:text="@string/income_0"
+            android:gravity="start"
+            android:textColor="@color/dark_green"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:ellipsize="end"
+            android:maxLines="1"/>
 
         <TextView
             android:id="@+id/dashBoard_TXT_balance"
@@ -28,15 +48,25 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/balance_0" />
+            android:text="@string/balance_0"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:ellipsize="end"
+            android:maxLines="1"/>
 
         <TextView
             android:id="@+id/dashBoard_TXT_expense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/expense_0" />
+            android:gravity="end"
+            android:text="@string/expense_0"
+            android:textColor="@color/dark_red"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:maxLines="1"/>
 
     </LinearLayout>
 

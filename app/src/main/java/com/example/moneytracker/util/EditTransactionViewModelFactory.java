@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.moneytracker.data.TransactionModel;
-import com.example.moneytracker.mainScreen.EditTransactionViewModel;
+import com.example.moneytracker.screens.mainScreen.EditTransactionViewModel;
 
 public class EditTransactionViewModelFactory implements ViewModelProvider.Factory {
 
