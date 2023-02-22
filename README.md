@@ -12,3 +12,7 @@ The app includes the following features:
 - Firebase Authentication and Realtime Database for storing user data and authentication
 - RxJava for asynchronous programming, which made it easy to avoid memory leaks and keep the app responsive
 - Fragments for creating reusable UI components and enhancing app modularity
+
+
+
+![image](https://user-images.githubusercontent.com/51398263/220624470-5ad84ee2-e560-495d-a9c5-3c8fd1c6bdb0.png)
