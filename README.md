@@ -6,12 +6,13 @@ The app includes the following features:
 
 - User authentication using Google login
 - Add, edit and delete income and expenses
-- View a list of all transactions and sort them by date, amount or category
+- View a list of all transactions and sort them by date, amount, category, type, and more.
 - View a summary of total income and expenses for a selected period of time
 - The app is built using the MVVM architecture pattern, which allows for separation of concerns and easy testing.
 - Firebase Authentication and Realtime Database for storing user data and authentication
 - RxJava for asynchronous programming, which made it easy to avoid memory leaks and keep the app responsive
-- Fragments for creating reusable UI components and enhancing app modularity
+- Fragments and FragmentManager for creating reusable UI components and enhancing app modularity
+- Glide for image loading and caching
 
 
 
