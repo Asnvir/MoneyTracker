@@ -102,19 +102,19 @@ public class AccountFragment extends Fragment implements HasCustomTitle {
 
         viewModel.getBalanceLiveData().observe(getViewLifecycleOwner(), balance -> {
             if (balance != null) {
-                binding.accountTXTBalance.setText(getString(R.string.balance_label, balance));
+                binding.accountTXTBalance.setText(balance);
             }
         });
 
         viewModel.getIncomeLiveData().observe(getViewLifecycleOwner(), income -> {
             if (income != null) {
-                binding.accountTXTIncome.setText(getString(R.string.income_label, income));
+                binding.accountTXTIncome.setText(income);
             }
         });
 
         viewModel.getExpenseLiveData().observe(getViewLifecycleOwner(), expense -> {
             if (expense != null) {
-                binding.accountTXTExpense.setText(getString(R.string.expense_label, expense));
+                binding.accountTXTExpense.setText(expense);
             }
         });
 
