@@ -24,7 +24,8 @@ The app includes the following features:
   <img src="https://user-images.githubusercontent.com/51398263/221247882-3e1e9931-ac52-4fb8-b70a-1b7c8147ac04.png" width="200" height ="350"/>
   <img src="https://user-images.githubusercontent.com/51398263/221247164-e76b410e-4e34-4ac0-9e78-dba2b7df333a.png" width="200" height ="350"/>
   <img src="https://user-images.githubusercontent.com/51398263/221246619-a3ad12d5-d262-4410-a45a-5bbba2d04f84.png" width="200" height ="350"/>
-  <img src="https://user-images.githubusercontent.com/51398263/221246917-c1a1a0d7-04d7-43d6-afe7-a264b7551c8e.png" width="200" height ="350"/>
+  <img src="https://user-images.githubusercontent.com/51398263/221359928-7f853731-878f-484b-a361-3ef783ed89c4.png" width="200" height ="350"/>
 </p>
+
 
 
