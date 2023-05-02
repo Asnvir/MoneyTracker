@@ -1,4 +1,4 @@
-# Money Tracker App
+# Money Tracker 
 This repository contains the source code for a money tracker app created by Artur Kopytin for Android using Java. The app allows users to track their income and expenses and view their financial history. The app is fully connected with Firebase, and Google login is used to provide a seamless and secure user authentication experience.
 
 ## Features
