@@ -1,19 +1,5 @@
 # Money Tracker 
-This repository contains the source code for a money tracker app created by Artur Kopytin for Android using Java. The app allows users to track their income and expenses and view their financial history. The app is fully connected with Firebase, and Google login is used to provide a seamless and secure user authentication experience.
-
-## Features
-The app includes the following features:
-
-- User authentication using Google login
-- Add, edit and delete income and expenses
-- View a list of all transactions and sort them by date, amount, category, type, and more.
-- View a summary of total income and expenses for a selected period of time
-- The app is built using the MVVM architecture pattern, which allows for separation of concerns and easy testing.
-- Firebase Authentication and Realtime Database for storing user data and authentication
-- RxJava for asynchronous programming, which made it easy to avoid memory leaks and keep the app responsive
-- Fragments and FragmentManager for creating reusable UI components and enhancing app modularity
-- Glide for image loading and caching
-
+Manage your finances effortlessly with Money Tracker  intuitive Android app. It simplifies tracking and organizing expenses, offering both Google authentication and traditional account creation for secure, convenient access. Enhance your financial clarity with just a few taps.
 
 ## Images of app
 <p align="center">
@@ -26,6 +12,24 @@ The app includes the following features:
   <img src="https://user-images.githubusercontent.com/51398263/221246619-a3ad12d5-d262-4410-a45a-5bbba2d04f84.png" width="200" height ="350"/>
   <img src="https://user-images.githubusercontent.com/51398263/221359928-7f853731-878f-484b-a361-3ef783ed89c4.png" width="200" height ="350"/>
 </p>
+
+## Features
+- User Authentication: Seamless login experience with Google, enhancing security and convenience.
+- Transaction Management: Users can effortlessly add, edit, and delete their income and expenses, maintaining up-to-date financial records.
+- Comprehensive Filtering: Offers advanced sorting options for transactions by date, amount, category, type, etc., making it easier to locate specific entries.
+- Financial Overview: Provides a summary of total income and expenses over user-selected periods, aiding in better financial planning and analysis.
+
+## Architecture
+### MVVM
+Money Tracker  is built on the Model-View-ViewModel (MVVM) architectural pattern, a strategy that significantly enhances the project's maintainability, scalability, and testability.
+## Technologies
+- Firebase: Incorporates Firebase Authentication and Realtime Database for secure user authentication and efficient data storage.
+- RxJava: Employs RxJava for asynchronous programming, ensuring the app remains responsive and free from memory leaks.
+- Android UI Components: Leverages Fragments and FragmentManager for creating modular and reusable UI components.
+- Glide: Utilizes Glide for efficient image loading and caching, enhancing UI performance and user experience.
+
+
+
 
 
 
