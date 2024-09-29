@@ -1,5 +1,5 @@
 # Money Tracker 
-Manage your finances effortlessly with Money Tracker  intuitive Android app. It simplifies tracking and organizing expenses, offering both Google authentication and traditional account creation for secure, convenient access. Enhance your financial clarity with just a few taps.
+This intuitive Android app simplifies expense tracking and organization. Gain financial clarity in seconds.
 
 ## Images of app
 <p align="center">
