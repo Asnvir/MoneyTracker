@@ -1,5 +1,5 @@
 # Money Tracker 
-This intuitive Android app simplifies expense tracking and organization. Gain financial clarity in seconds.
+MoneyTracker is an intuitive Android app simplifies expense tracking and organization. Gain financial clarity in seconds.
 
 ## Images of app
 <p align="center">
